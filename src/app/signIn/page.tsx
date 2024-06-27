@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 function Page() {
@@ -65,6 +66,11 @@ function Page() {
         <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
           Sign In
         </button>
+        <div className="mt-4 text-center">
+          <Link href="/signUp" className="text-blue-500 hover:text-blue-700">
+            Don't have an account? Sign Up
+          </Link>
+        </div>
       </form>
     </div>
   );
