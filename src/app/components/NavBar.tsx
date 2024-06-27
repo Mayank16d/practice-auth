@@ -1,9 +1,14 @@
 'use client'
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hasToken, setHasToken] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    setHasToken(!!token);
+  }, []);
 
   return (
     <div className='flex justify-between items-center px-4 bg-purple-500 py-5 rounded-lg text-xl'>
@@ -24,9 +29,14 @@ function NavBar() {
           <li><Link href={"/Product"}>Product</Link></li>
           <li><Link href={"/Cart"}>Cart</Link></li>
         </ul>
-        <div className='mt-4 md:mt-0'>
-          <Link href={"/signIn"} className='bg-blue-700 hover:bg-blue-900 text-white px-3 py-2 rounded-full'>Login/Signup</Link>
-        </div>
+        <div>
+        {!hasToken ? (
+          <Link href="/signIn" className='bg-blue-700 hover:bg-blue-900 text-white px-3 py-2 rounded-full'>Login/Signup</Link>
+          
+        ) : (
+          <Link href="/profile" className='bg-blue-700 hover:bg-blue-900 text-white px-3 py-2 rounded-full'>Profile</Link>
+        )}
+      </div>
       </div>
     </div>
   );
